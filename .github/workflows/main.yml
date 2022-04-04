@@ -27,5 +27,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           {
-          echo github.event.pull_request.title
+          echo ${{ github.event.pull_request.title }}
           } &> /dev/null
